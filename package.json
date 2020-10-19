@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "heroku": "^7.46.0"
+    "express": "^4.17.1",
+    "heroku": "^7.46.0",
+    "path": "^0.12.7"
   },
   "devDependencies": {},
   "scripts": {
