@@ -101,7 +101,7 @@ class Form extends Component {
         }
         if(count >= 2) {
             this.setState({ id: this.props.id })
-            // this.props.addIssue(this.state)
+            this.props.addIssue(this.state)
             window.M.toast({html: 'Thank you contributing to well being of the society! :)', classes: 'rounded'})
             this.props.props.history.push({
                 pathname: '/result',
