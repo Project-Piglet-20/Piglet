@@ -5,15 +5,11 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  display: flex;
-  max-height: fit-content;
-  flex-direction: column;
-  min-width: 700px;
-  height: 100%;
 }
 
-main {
-  flex: 1 0 auto;
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
 }
 
 .pin {
@@ -27,15 +23,26 @@ main {
   top: 50%;
   margin: -20px 0 0 -20px;
 }
+
 .pin:after {
   content: "";
   width: 14px;
   height: 14px;
-  margin: 8px 0 0 8px;
+  margin: 7px 0 0 -6px;
   background: #e6e6e6;
   position: absolute;
   border-radius: 50%;
 }
+
+/* .pin:after {
+  content: "";
+  width: 14px;
+  height: 14px;
+  margin: 7px 0 0 -6px;
+  background: #e6e6e6;
+  position: absolute;
+  border-radius: 50%;
+} */
 
 .bounce {
   animation-name: bounce;
@@ -61,7 +68,7 @@ main {
   height: 40px;
   width: 40px;
   position: absolute;
-  margin: -13px 0 0 -13px;
+  margin: -13px 0 0 -20px;
   animation: pulsate 1s ease-out;
   animation-iteration-count: infinite;
   opacity: 0;
@@ -113,43 +120,4 @@ main {
 #map {
   height: 600px;  /* The height is 400 pixels */
   width: 100%;  /* The width is the width of the web page */
-}
-
-nav ul a,
-nav .brand-logo {
-  color: #444;
-}
-
-p {
-  line-height: 2rem;
-}
-
-.sidenav-trigger {
-  color: #26a69a;
-}
-
-.parallax-container {
-  min-height: 380px;
-  line-height: 0;
-  height: auto;
-  color: rgba(255,255,255,.9);
-}
-  .parallax-container .section {
-    width: 100%;
-  }
-
-@media only screen and (max-width : 992px) {
-  .parallax-container .section {
-    position: absolute;
-    top: 40%;
-  }
-  #index-banner .section {
-    top: 10%;
-  }
-}
-
-@media only screen and (max-width : 600px) {
-  #index-banner .section {
-    top: 0;
-  }
 }
