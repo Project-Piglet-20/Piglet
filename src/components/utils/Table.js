@@ -1,36 +1,29 @@
-import React, { Component } from 'react';
+import React from 'react';
+import IssueCard from './IssueCard';
+import { Grid } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
-var count = 0;
+const useStyles = makeStyles({
+    gridContainer: {
+        paddingLeft: '40px',
+        paddingRight: '40px'
+    }
+});
 
-class Table extends Component {
-    componentDidMount() {
-        const message = window.innerWidth < 800 ? "Swipe right for more ---->" : null 
-        if (message !== null && count++ === 0) {
-            window.M.toast({html: message, classes: 'rounded'})
-        }
-    }
-    render() {
-        return (
-            <div>
-                <table className= "highlight responsive-table">
-                    <thead>
-                        <tr>
-                            <th> <i className= "material-icons left">format_list_numbered</i> Sl No </th>
-                            <th> <i className= "material-icons left">search</i> Issue Category </th>
-                            <th> <i className= "material-icons left">info_outline</i> Issue Type </th>
-                            <th> <i className= "material-icons left">place</i> Location </th>
-                            <th> <i className= "material-icons left">today</i> Date of Reporting </th>
-                            <th> <i className= "material-icons left">done_all</i>Status </th>
-                            <th> <i className= "material-icons left">date_range</i> Date of Closure </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        { this.props.issueList }
-                    </tbody>
-                </table>
-            </div>
-        )
-    }
+export default function Table(props) {
+    const classes = useStyles();
+    return (
+        <Grid
+            container
+            spacing={4}
+            className={classes.gridContainer}
+            justify="center"
+        >
+            {props.issueList.map((issue) => (
+                <Grid item xs={12} sm={6} md={4}>
+                    <IssueCard issue={issue} />
+                </Grid>
+            ))}
+        </Grid>
+    );
 }
-
-export default Table;
