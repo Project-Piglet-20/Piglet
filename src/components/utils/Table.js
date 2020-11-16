@@ -3,6 +3,8 @@ import IssueCard from './IssueCard';
 import { Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
+var i = 0;
+
 const useStyles = makeStyles({
     gridContainer: {
         paddingLeft: '40px',
@@ -20,7 +22,7 @@ export default function Table(props) {
             justify="center"
         >
             {props.issueList.map((issue) => (
-                <Grid item xs={12} sm={6} md={4}>
+                <Grid item xs={12} sm={6} md={4} key={++i}>
                     <IssueCard issue={issue} />
                 </Grid>
             ))}

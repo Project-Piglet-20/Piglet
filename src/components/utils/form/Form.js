@@ -1,7 +1,6 @@
 import Selectdropdown from './Selectdropdown';
-import { ACCESS_TOKEN } from '../../utils/Keys';
-import firebase from '../../../config/fbConfig';
 import React, { Component } from 'react';
+import { ACCESS_TOKEN } from '../../utils/Keys';
 import axios from 'axios';
 import { addIssue } from '../../../actions/addIssue';
 import { connect } from 'react-redux';
@@ -10,7 +9,6 @@ import OTP from './OTP';
 
 var count = 0;
 var valid = true;
-var CategoryList = [];
 
 class Form extends Component {
     state = {
@@ -20,29 +18,15 @@ class Form extends Component {
             lat: null,
             lng: null
         },
+        Locality: null,
         Number: null,
         Status: 'Reported',
         DOC: '-'
     };
-    UNSAFE_componentWillMount() {
+    componentDidMount() {
         count = 0;
         valid = true;
-        this.getList();
         this.getLocation();
-    }
-    getList() {
-        var db = firebase.firestore();
-        db.collection('dropdownList')
-            .get()
-            .then((querySnapshot) => {
-                querySnapshot.forEach((doc) => {
-                    var tempdata = doc.data();
-                    if (tempdata.id !== 'null') CategoryList.push(tempdata);
-                });
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
     }
     getLocation() {
         if (navigator.geolocation) {
@@ -71,8 +55,6 @@ class Form extends Component {
             '.json?access_token=' +
             ACCESS_TOKEN;
         axios.get(url).then((res) => {
-            var toastHTML = 'Your Location: ' + res.data.features[1].text;
-            window.M.toast({ html: toastHTML, classes: 'rounded' });
             this.setState({ Locality: res.data.features[1].text });
         });
     };
@@ -110,7 +92,6 @@ class Form extends Component {
         }
         if (count >= 2) {
             this.setState({ id: this.props.id });
-            console.log(this.state);
             this.props.addIssue(this.state);
             window.M.toast({
                 html: 'Thank you contributing to well being of the society! :)',
@@ -118,7 +99,8 @@ class Form extends Component {
             });
             this.props.props.history.push({
                 pathname: '/result',
-                state: this.state
+                state: this.state,
+                center: this.props.center
             });
         } else {
             alert('All fields are mandatory!');
@@ -132,6 +114,7 @@ class Form extends Component {
                 lat: null,
                 lng: null
             },
+            Locality: null,
             Number: null,
             Status: 'Reported',
             DOC: '-'
@@ -153,7 +136,7 @@ class Form extends Component {
                     <div>
                         <Selectdropdown
                             addData={this.addData}
-                            CategoryList={CategoryList}
+                            CategoryList={this.props.props.optionList}
                             count={count}
                             decrementCount={this.decrementCount}
                             value={this.state.Type}
@@ -178,21 +161,19 @@ class Form extends Component {
                             className="btn-floating waves-effect waves-light red right"
                             type="reset"
                         >
-                            {' '}
                             <i className="material-icons" id="form_submit">
                                 delete
-                            </i>{' '}
+                            </i>
                         </button>
                         <button
                             disabled={valid}
                             className="btn waves-effect waves-light center"
                             type="submit"
                         >
-                            {' '}
                             <i className="material-icons right" id="submit">
                                 send
-                            </i>{' '}
-                            Submit{' '}
+                            </i>
+                            Submit
                         </button>
                     </div>
                     <br />
@@ -206,7 +187,7 @@ class Form extends Component {
                         >
                             announcement
                         </i>
-                        We've automatically collected your location{' '}
+                        We've automatically collected your location
                         <i className="material-icons right">place</i>
                     </p>
                     <br />

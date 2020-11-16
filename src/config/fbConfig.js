@@ -1,6 +1,6 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
-import 'firebase/auth';
+// import 'firebase/auth';
 
 // Your web app's Firebase configuration
 var firebaseConfig = {
@@ -14,8 +14,11 @@ var firebaseConfig = {
     measurementId: "G-PS30013RJC"
   };
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-// firebase.analytics();
 
+firebase.initializeApp(firebaseConfig);
+
+// firebase.analytics();
+// export const auth = firebase.auth();
+export const firestore = firebase.firestore();
 
 export default firebase;

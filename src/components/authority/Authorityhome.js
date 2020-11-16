@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import Table from '../utils/Table';
+import Table from './Table';
 
-class Corporator extends Component {
+class AuthorityHome extends Component {
     render() {
         return(
             <div>
                 <div className="col s12 m7">
                     <div className="card">
                         <div className="card-content">
-                            <Table props= { this.props } />
+                            <Table />
                         </div>
                     </div>
                 </div>
@@ -18,4 +18,4 @@ class Corporator extends Component {
     }
 }
 
-export default Corporator;
+export default AuthorityHome;

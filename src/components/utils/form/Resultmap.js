@@ -33,28 +33,18 @@ const getMapOptions = () => {
 };
 
 class Map extends Component {
-    state = {
-        center: {
-            lat: null,
-            lng: null
-        }
-    };
-    componentDidMount() {
-        const center = this.props.center;
-        this.setState({ center });
-    }
     render() {
         return (
             <div style={{ height: '60vh', width: '100%' }}>
                 <GoogleMapReact
                     bootstrapURLKeys={{ key: api_key }}
-                    center={this.state.center}
+                    center={this.props.center}
                     defaultZoom={20}
                     options={getMapOptions}
                 >
                     <Marker
-                        lat={this.state.center.lat}
-                        lng={this.state.center.lng}
+                        lat={this.props.center.lat}
+                        lng={this.props.center.lng}
                         name="My Location"
                         color="red"
                     />

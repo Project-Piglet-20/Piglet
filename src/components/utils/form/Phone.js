@@ -7,7 +7,7 @@ class Phone extends Component {
     render() {
         return (
             <div className="row" id="issue_card">
-                <div class="input-field col s6" style={{minWidth: '360px'}}>
+                <div className="input-field col s6" style={{minWidth: '330px'}}>
                     <input
                         id="Number"
                         type="tel"
@@ -15,7 +15,7 @@ class Phone extends Component {
                         onChange={(e) => this.props.clickHandler(e)}
                         className="validate"
                     />
-                    <label for="Number">
+                    <label htmlFor="Number">
                         <i className="material-icons left">phone</i>Phone Number
                     </label>
                 </div>

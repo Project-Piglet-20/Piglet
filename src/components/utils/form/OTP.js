@@ -3,7 +3,7 @@ import React from 'react';
 const OTP = () => {
     return (
         <div className="row" id="issue_card">
-            <div className="input-field col s6" style={{minWidth: '360px'}}>
+            <div className="input-field col s6" style={{minWidth: '330px'}}>
                 <input
                     id="OTP"
                     onChange={(e) =>
@@ -17,7 +17,7 @@ const OTP = () => {
                     className="right materialize-textarea"
                     style={{ paddingLeft: '0px' }}
                 />
-                <label for="OTP">
+                <label htmlFor="OTP">
                     <i className="material-icons left">message</i> Enter OTP
                 </label>
             </div>
