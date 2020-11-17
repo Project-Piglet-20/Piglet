@@ -206,7 +206,7 @@ const Auxiliary = (props) => {
                         </Drawer>
                     </Hidden>
                 </nav>
-                <main className={classes.content} style={{left: 0, minWidth: 'fit-content', width: 'fit-content'}}>
+                <main className={classes.content} style={{left: 0}}>
                     <div className={classes.toolbar} />
                     <div className={classes.gridroot}>{props.children}</div>
                 </main>
