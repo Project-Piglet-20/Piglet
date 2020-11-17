@@ -8,7 +8,7 @@ class Report extends Component {
     render() {
         return (
             <Auxiliary>
-                <div>
+                <div style={{ width: window.innerWidth }}>
                     <Map center={this.props.center} />
                     <div>
                         <div className="card-panel hoverable">

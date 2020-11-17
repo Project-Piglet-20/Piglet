@@ -69,7 +69,7 @@ import { red } from '@material-ui/core/colors';
 const useStyles = makeStyles((theme) => ({
     root: {
         width: 'fit-content',
-        minWidth: 300
+        minWidth: window.innerWidth
     },
     media: {
         height: 0,
@@ -100,7 +100,7 @@ const Person = ({ people, content }) => {
 
     const personList = people.map((person) => {
         return (
-            <Grid item xs={12} sm={6} md={4} key={person.name} style={{width: '100%', padding: '5px'}}>
+            <Grid item xs={12} sm={6} md={4} key={person.name} style={{width: '100%', padding: '20px', minWidth: '300px', maxWidth: '360px'}}>
                     <div className="card">
                         <div className="card-image waves-effect waves-block waves-light">
                             <img
@@ -186,7 +186,7 @@ const Person = ({ people, content }) => {
     });
 
     return (
-        <Grid container spacing={4} className={classes.gridContainer}>
+        <Grid className={classes.gridContainer}>
             {personList}
         </Grid>
     );

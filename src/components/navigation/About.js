@@ -31,11 +31,11 @@ const About = () => {
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ullamcorper pretium ornare. In iaculis, nulla vel feugiat efficitur, diam ex facilisis tortor, sit amet rutrum neque ligula quis diam. Vivamus vel lorem eu nibh interdum pulvinar ac in dolor. Sed orci libero, commodo vulputate laoreet id, blandit gravida libero. Nunc metus metus, vehicula nec cursus eu, pellentesque vel enim. Duis ornare risus est, sit amet dictum nibh porta sed.'
     };
     return (
-        <div>
-            <Auxiliary>
+        <Auxiliary>
+            <div>
                 <Person people={state.people} content={state.content} />
-            </Auxiliary>
-        </div>
+            </div>
+        </Auxiliary>
     );
 };
 

@@ -210,9 +210,6 @@ import firebase from 'firebase';
 var count = 0;
 
 class AuthorityLogin extends Component {
-    state = {
-        count: 0
-    };
     componentDidMount() {
         if (++count === 3) {
             const uiConfig = {
@@ -229,13 +226,9 @@ class AuthorityLogin extends Component {
             ui.start('#firebaseui-auth-container', uiConfig);
         }
     }
-    componentDidUpdate() {
-        console.log('Did update');
-    }
     render() {
         return (
             <>
-                {this.props ? console.log(this.props) : console.log('no props')}
                 <h1>LOGIN</h1>
                 <div id="firebaseui-auth-container"></div>
             </>

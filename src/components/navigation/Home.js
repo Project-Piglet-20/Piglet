@@ -61,15 +61,13 @@ class Home extends Component {
     render() {
         return (
             <Auxiliary>
-                <div style={{width: window.innerWidth}}>
-                    <Map center={this.props.center} />
-                    <div className="card-panel hoverable">
-                        <h3 className="center" style={{ color: '#00838f' }}>
-                            Problems reported near you
-                        </h3>
-                        <br />
-                        <Table issueList={this.state.issueList} />
-                    </div>
+                <Map center={this.props.center} />
+                <div className="card-panel hoverable">
+                    <h3 className="center" style={{ color: '#00838f' }}>
+                        Problems reported near you
+                    </h3>
+                    <br />
+                    <Table issueList={this.state.issueList} />
                 </div>
                 <br />
             </Auxiliary>

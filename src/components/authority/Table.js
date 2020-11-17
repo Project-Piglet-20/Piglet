@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import firebase from '../../config/fbConfig';
+import { firestore } from '../../config/fbConfig';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import Heatmap from '../utils/Heatmap';
+import Divider from '@material-ui/core/Divider';
 
 var ACCESS_TOKEN =
     'pk.eyJ1IjoidmlwaW5yYmhhcmFkd2FqIiwiYSI6ImNrY3VvZGQ0MzJhNHYyeHM2a21uNGEzZm4ifQ.53CYrj7PS_gUiv8iqESrXQ';
@@ -32,6 +33,10 @@ class Table extends Component {
             '/' +
             date.getFullYear();
         issues[0].DOC = today;
+        firestore
+            .collection('issues')
+            .doc(issues[0].docid)
+            .update({ DOC: new Date(), Status: 'Resolved' });
         newIssues.push(issues[0]);
         this.setState({ issues: newIssues });
 
@@ -94,13 +99,14 @@ class Table extends Component {
                 });
                 axios.get(url).then((res) => {
                     var promise = new Promise((resolve, reject) => {
-                        var db = firebase.firestore();
-                        db.collection('issues')
+                        firestore
+                            .collection('issues')
                             .where('Locality', '==', res.data.features[1].text)
                             .get()
                             .then((querySnapshot) => {
                                 querySnapshot.forEach((doc) => {
                                     var tempdata = doc.data();
+                                    tempdata.docid = doc.id;
                                     tempdata.DOR = new Date(
                                         tempdata.DOR.seconds * 1000
                                     ).toLocaleDateString('en-US');
@@ -147,7 +153,7 @@ class Table extends Component {
                                         <button
                                             className="btn waves-effect waves-red red"
                                             onClick={() =>
-                                                this.clickHandler(issue.DocID)
+                                                this.clickHandler(issue.docid)
                                             }
                                         >
                                             {issue.Status}
@@ -174,6 +180,19 @@ class Table extends Component {
         return (
             <div>
                 <div>
+                    <button
+                        className="btn waves-effect waves-teal right"
+                        onClick={this.logoutHandler}
+                        style={{ verticalAlign: 'center' }}
+                    >
+                        <i className="material-icons left">
+                            power_settings_new
+                        </i>
+                        Logout
+                    </button>
+                </div>
+                <br />
+                <div>
                     <h3>
                         <i
                             className="material-icons medium left"
@@ -182,14 +201,9 @@ class Table extends Component {
                             account_circle
                         </i>
                         Corporator
-                        <button
-                            className="btn waves-effect waves-teal right"
-                            onClick={this.logoutHandler}
-                        >
-                            Logout
-                        </button>
                     </h3>
                 </div>
+                <Divider />
                 <br />
                 <Heatmap center={this.state.center} />
                 <br />

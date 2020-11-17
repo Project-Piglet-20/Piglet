@@ -55,10 +55,10 @@ const useStyles = makeStyles((theme) => ({
         color: theme.palette.text.secondary
     },
     appFooter: {
-        // [theme.breakpoints.up('sm')]: {
-        //     width: `calc(100% - ${drawerWidth}px)`,
-        //     left: drawerWidth
-        // },
+        [theme.breakpoints.up('sm')]: {
+            width: `calc(100% - ${drawerWidth}px)`,
+            left: drawerWidth
+        },
         top: 'auto',
         bottom: 0
     },
@@ -206,7 +206,7 @@ const Auxiliary = (props) => {
                         </Drawer>
                     </Hidden>
                 </nav>
-                <main className={classes.content}>
+                <main className={classes.content} style={{left: 0, minWidth: 'fit-content', width: 'fit-content'}}>
                     <div className={classes.toolbar} />
                     <div className={classes.gridroot}>{props.children}</div>
                 </main>
