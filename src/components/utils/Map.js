@@ -37,19 +37,34 @@ class Map extends Component {
         center: {
             lat: null,
             lng: null
+        },
+        zoom: 20
+    };
+
+    location = () => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition((position) => {
+                this.setState({
+                    center: {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    }
+                });
+            });
         }
     };
+
     componentDidMount() {
-        const center = this.props.center;
-        this.setState({ center });
+        this.location();
     }
+
     render() {
         return (
             <div style={{ height: '60vh', width: '100%' }}>
                 <GoogleMapReact
                     bootstrapURLKeys={{ key: api_key }}
                     center={this.state.center}
-                    defaultZoom={20}
+                    defaultZoom={this.state.zoom}
                     options={getMapOptions}
                 >
                     <Marker

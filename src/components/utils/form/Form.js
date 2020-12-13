@@ -1,6 +1,7 @@
 import Selectdropdown from './Selectdropdown';
-import React, { Component } from 'react';
 import { ACCESS_TOKEN } from '../../utils/Keys';
+import firebase from '../../../config/fbConfig';
+import React, { Component } from 'react';
 import axios from 'axios';
 import { addIssue } from '../../../actions/addIssue';
 import { connect } from 'react-redux';
@@ -9,6 +10,7 @@ import OTP from './OTP';
 
 var count = 0;
 var valid = true;
+var CategoryList = [];
 
 class Form extends Component {
     state = {
@@ -18,15 +20,29 @@ class Form extends Component {
             lat: null,
             lng: null
         },
-        Locality: null,
         Number: null,
         Status: 'Reported',
         DOC: '-'
     };
-    componentDidMount() {
+    UNSAFE_componentWillMount() {
         count = 0;
         valid = true;
+        this.getList();
         this.getLocation();
+    }
+    getList() {
+        var db = firebase.firestore();
+        db.collection('dropdownList')
+            .get()
+            .then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    var tempdata = doc.data();
+                    if (tempdata.id !== 'null') CategoryList.push(tempdata);
+                });
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     }
     getLocation() {
         if (navigator.geolocation) {
@@ -55,6 +71,10 @@ class Form extends Component {
             '.json?access_token=' +
             ACCESS_TOKEN;
         axios.get(url).then((res) => {
+            var toastHTML = 'Your Location: ' + res.data.features[1].text;
+            window.M.toast({ html: toastHTML, options: {
+                displayLength: 100
+            } });
             this.setState({ Locality: res.data.features[1].text });
         });
     };
@@ -97,10 +117,9 @@ class Form extends Component {
                 html: 'Thank you contributing to well being of the society! :)',
                 classes: 'rounded'
             });
-            this.props.props.history.push({
+            this.props.routeList.history.push({
                 pathname: '/result',
-                state: this.state,
-                center: this.props.center
+                state: this.state
             });
         } else {
             alert('All fields are mandatory!');
@@ -114,7 +133,6 @@ class Form extends Component {
                 lat: null,
                 lng: null
             },
-            Locality: null,
             Number: null,
             Status: 'Reported',
             DOC: '-'
@@ -136,7 +154,7 @@ class Form extends Component {
                     <div>
                         <Selectdropdown
                             addData={this.addData}
-                            CategoryList={this.props.props.optionList}
+                            CategoryList={CategoryList}
                             count={count}
                             decrementCount={this.decrementCount}
                             value={this.state.Type}
@@ -161,24 +179,26 @@ class Form extends Component {
                             className="btn-floating waves-effect waves-light red right"
                             type="reset"
                         >
+                            {' '}
                             <i className="material-icons" id="form_submit">
                                 delete
-                            </i>
+                            </i>{' '}
                         </button>
                         <button
                             disabled={valid}
                             className="btn waves-effect waves-light center"
                             type="submit"
                         >
+                            {' '}
                             <i className="material-icons right" id="submit">
                                 send
-                            </i>
-                            Submit
+                            </i>{' '}
+                            Submit{' '}
                         </button>
                     </div>
                     <br />
                 </div>
-                <div className="col s5 m7">
+                <div>
                     <br />
                     <p className="right" style={{ color: ' red' }}>
                         <i
@@ -187,7 +207,7 @@ class Form extends Component {
                         >
                             announcement
                         </i>
-                        We've automatically collected your location
+                        We've automatically collected your location{' '}
                         <i className="material-icons right">place</i>
                     </p>
                     <br />

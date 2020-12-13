@@ -11,20 +11,19 @@ import { reduxFirestore, getFirestore } from 'redux-firestore';
 import { reactReduxFirebase, getFirebase } from 'react-redux-firebase';
 import fbConfig from './config/fbConfig';
 
-const store = createStore(
-    Reducer,
-    compose(
-        applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })),
-        reduxFirestore(fbConfig),
-        reactReduxFirebase(fbConfig)
-    )
+const store = createStore(Reducer, 
+  compose(
+      applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })),
+      reduxFirestore(fbConfig),
+      reactReduxFirebase(fbConfig)
+  )
 );
 
 ReactDOM.render(
-    <Provider store={store}>
-        <App />
-    </Provider>,
-    document.getElementById('root')
+  <Provider store= { store }>
+      <App />
+  </Provider>,
+  document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function

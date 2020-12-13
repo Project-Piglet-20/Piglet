@@ -1,29 +1,24 @@
 import React, { Component } from 'react';
 import Form from '../utils/form/Form';
 import Map from '../utils/Map';
-import Auxiliary from '../hoc/Auxiliary';
-import { withRouter } from 'react-router-dom';
 
 class Report extends Component {
     render() {
         return (
-            <Auxiliary>
-                <div>
-                    <Map center={this.props.center} />
-                    <div>
-                        <div className="card-panel hoverable">
-                            <br />
-                            <Form
-                                props={this.props}
-                                center={this.props.center}
-                            />
-                        </div>
+            <div className="row">
+                <div className="col m1"></div>
+                <div className="col s12 m10">
+                    <Map />
+                    <div className="card-panel hoverable">
+                        <br />
+                        <Form routeList={this.props} />
                     </div>
                     <br />
                 </div>
-            </Auxiliary>
+                <div className="col m1"></div>
+            </div>
         );
     }
 }
 
-export default withRouter(Report);
+export default Report;

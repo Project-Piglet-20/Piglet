@@ -2,36 +2,40 @@ import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { auth } from '../../config/fbConfig';
 
-const AuthorityAuthencated = (props) => {
-    const [loggedIn, setloggedIn] = useState(null)
+const AuthorityAuthenticated = (props) => {
+    const [loggedIn, setloggedIn] = useState(null);
     auth.onAuthStateChanged((user) => {
         if (user) {
-            setloggedIn(true)
+            setloggedIn(true);
         } else {
-            setloggedIn(false)
+            setloggedIn(false);
         }
-    })
+    });
     if (props.nonAuthenicated) {
         if (loggedIn == null) {
-            return "Loading..."
-        }
-        else if (!loggedIn) {
-            return props.children
-        }
-        else if (loggedIn) {
-            return <Redirect to="/authorityhome" />
+            return (
+                <div className="progress">
+                    <div className="indeterminate"></div>
+                </div>
+            );
+        } else if (!loggedIn) {
+            return props.children;
+        } else if (loggedIn) {
+            return <Redirect to="/authorityhome" />;
         }
     } else {
         if (loggedIn == null) {
-            return "Loading..."
-        }
-        else if (loggedIn) {
-            return props.children
-        }
-        else if (!loggedIn) {
-            return <Redirect to="/authoritylogin" />
+            return (
+                <div className="progress">
+                    <div className="indeterminate"></div>
+                </div>
+            );
+        } else if (loggedIn) {
+            return props.children;
+        } else if (!loggedIn) {
+            return <Redirect to="/authoritylogin" />;
         }
     }
-}
+};
 
-export default AuthorityAuthencated;
+export default AuthorityAuthenticated;

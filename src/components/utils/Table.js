@@ -1,31 +1,27 @@
 import React from 'react';
 import IssueCard from './IssueCard';
-import { Grid } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
 
-var i = 0;
-
-const useStyles = makeStyles({
-    gridContainer: {
-        paddingLeft: '40px',
-        paddingRight: '40px'
-    }
-});
-
-export default function Table(props) {
-    const classes = useStyles();
+const Table = (props) => {
+    var i = 0;
     return (
-        <Grid
-            container
-            spacing={4}
-            className={classes.gridContainer}
-            justify="center"
-        >
-            {props.issueList.map((issue) => (
-                <Grid item xs={12} sm={6} md={4} key={++i}>
-                    <IssueCard issue={issue} />
-                </Grid>
-            ))}
-        </Grid>
+        <div className="row">
+            {!props.issueList ? (
+                <div className="progress">
+                    <div className="indeterminate"></div>
+                </div>
+            ) : (
+                props.issueList.map((issue) => (
+                    <div
+                        className="col s12 m4"
+                        style={{ paddingBottom: '40px' }}
+                        key={i++}
+                    >
+                        <IssueCard issue={issue} />
+                    </div>
+                ))
+            )}
+        </div>
     );
-}
+};
+
+export default Table;

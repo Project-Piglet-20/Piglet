@@ -4,25 +4,17 @@ import CreatableSelect from 'react-select/creatable';
 const Selectdropdown = ({ addData, CategoryList, count, decrementCount }) => {
     return (
         <div className="card-content" style={{ textAlign: 'left' }}>
-            <label
-                htmlFor="dropdown"
-                style={{ fontSize: 'larger', color: 'black' }}
-            >
-                <i className="material-icons left">search</i>What is the
-                problem?
+            <label style={{ fontSize: 'larger', color: 'black' }}>
+                What is the problem?
             </label>
-
+            <i className="material-icons left">search</i>
             <br />
-            <div
-                className="input-field col s12"
-                style={{ minWidth: '330px', width: 'fit-content' }}
-            >
+            <div className="input-field col s12">
                 <CreatableSelect
-                    id="dropdown"
                     isClearable
                     options={CategoryList}
                     onChange={(e) => (e ? addData(e) : decrementCount(count))}
-                />
+                />{' '}
             </div>
         </div>
     );

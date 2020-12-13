@@ -4,14 +4,13 @@ import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import Avatar from '@material-ui/core/Avatar';
+import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
-import Divider from '@material-ui/core/Divider';
 import clsx from 'clsx';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        maxWidth: 360,
-        minWidth: 'fit-content'
+        maxWidth: 345
     },
     avatar: {
         backgroundColor: red[500]
@@ -20,56 +19,38 @@ const useStyles = makeStyles((theme) => ({
 
 const IssueCard = ({ issue }) => {
     const classes = useStyles();
-    const sub_header = (
-        <span>
-            <i className="material-icons left">today</i>
-            <p style={{ verticalAlign: 'center' }}>{issue.DOR}</p>
-        </span>
-    );
     return (
-        <Card className={classes.root}>
+        <Card className={clsx(classes.root, "hoverable")}>
             <CardHeader
                 avatar={
-                    <Avatar
-                        aria-label="recipe"
-                        className={clsx(classes.avatar, 'teal accent-3')}
-                    >
-                        {issue.id}
+                    <Avatar aria-label="recipe" className={classes.avatar}>
+                        {issue.Type[0]}
                     </Avatar>
                 }
                 title={issue.Type}
-                subheader={sub_header}
-                style={{ textAlign: 'left' }}
-                className="amber lighten-2"
+                subheader={issue.DOR}
             />
-            <Divider />
-            <CardContent className="yellow lighten-2">
-                <p style={{ textAlign: 'left' }}>
-                    <span style={{ fontWeight: 'bold' }}>
-                        <i className="material-icons left">search</i>Category:
-                    </span>
-                    {issue.Category}
-                </p>
-                <p style={{ textAlign: 'left' }}>
-                    <span style={{ fontWeight: 'bold' }}>
-                        <i className="material-icons left">place</i>Reporting
-                        place:
-                    </span>
-                    {issue.Locality}
-                </p>
-                <p style={{ textAlign: 'left' }}>
-                    <span style={{ fontWeight: 'bold' }}>
-                        <i className="material-icons left">done_all</i>Status:
-                    </span>
-                    {issue.Status}
-                </p>
-                <p style={{ textAlign: 'left' }}>
-                    <span style={{ fontWeight: 'bold' }}>
-                        <i className="material-icons left">date_range</i>Date of
-                        Closure:
-                    </span>
-                    {issue.DOC}
-                </p>
+            <CardContent>
+                <Typography>
+                    <div className="container">
+                        <div className="container">
+                            <div>Category:{issue.Category}</div>
+                        </div>
+                    </div>
+                </Typography>
+                <Typography>
+                    <div>Reporting place: {issue.Locality}</div>
+                </Typography>
+                <Typography>
+                    <div className="container">
+                        <div className="container">
+                            <div>Status: {issue.Status}</div>
+                        </div>
+                    </div>
+                </Typography>
+                <Typography>
+                    <div>Date of Closure: {issue.DOC}</div>
+                </Typography>
             </CardContent>
         </Card>
     );

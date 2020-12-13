@@ -7,7 +7,7 @@ class Phone extends Component {
     render() {
         return (
             <div className="row" id="issue_card">
-                <div className="input-field col s6" style={{minWidth: '330px'}}>
+                <div className="input-field col s12">
                     <input
                         id="Number"
                         type="tel"
